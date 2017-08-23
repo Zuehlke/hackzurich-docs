@@ -74,3 +74,15 @@ Motion is a nice lightweight, yet capable application for operating surveillance
 
 ####  Links
 - Further information: https://www.linux.com/learn/how-operate-linux-spycams-motion
+
+## Access via Serial Console
+- You need an FTDI USB Cable
+- Connect GND, RX, TX to the appropiate pins on the Raspberry Pi's Pin-Header
+  - GND to #6
+  - Rx (view from Computer) to #8
+  - Tx (view from Computer) to #10
+- On windows connect to the serial console using e.g. PuTTY
+- On windows look up the COM Port in the Device Manager
+- Set the baud rate to 115200
+- Connect
+- Further information: http://elinux.org/RPi_Serial_Connection
