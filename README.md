@@ -40,4 +40,9 @@ The following steps are needed to get the example running on your Raspberry Pi:
 ### Setup ServoBrick
 - Get a Power Supply prepared to use for the Servo Brick (Power Supply box is marked with "Servo Brick")
 - Connect components like on the picture below:
-![Alt text](servobrick_electrical_setup.jpg)
+![Servobrick Electrical Setup](servobrick_electrical_setup.jpg)
+- Further information about ServoBrick:  [Servo Brick Docu](https://www.tinkerforge.com/en/shop/servo-brick.html)
+
+### Setup Relais and Fan
+Connect components like on the picture below:
+![Relais Fan Electrical Setup](servobrick_electrical_setup.jpg)
