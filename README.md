@@ -45,4 +45,4 @@ The following steps are needed to get the example running on your Raspberry Pi:
 
 ### Setup Relais and Fan
 Connect components like on the picture below:
-![Relais Fan Electrical Setup](servobrick_electrical_setup.jpg)
+![Relais Fan Electrical Setup](relais_fan_electrical_setup.jpg)
