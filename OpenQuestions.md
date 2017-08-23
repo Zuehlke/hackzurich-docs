@@ -7,6 +7,8 @@
     - MyStrom Switch
     - MyStrom Button
     - iPad cannot interact with Raspberry Pi
+- It would be helpful if we already know the WLAN SSID and password on the hack ZH
+  - If we have the information before the start of the hack, we can prepare the Raspberry Pi images
 - Is it possible to get the IP address of a device when the MAC address is known?
   - We know the MAC address of our devices and need the IP
 - How many devices (IPs) are allowed for each developer group?
