@@ -4,8 +4,7 @@ To setup the myStrom WiFi Button you need to use the myStrom App and follow thei
 After you set the Button up you are able to configure the endpoints for the single, long and double click events. An example is following:
 
 unix: curl -v -d 'single=get://{endpoint}&double=get://{endpoint}' http://{ipButton}/api/v1/device/{macButton}
-
-windows: 
+windows: curl.exe -v -d "single=get://{endpoint}&double=get://{endpoint}" http://{ipButton}/api/v1/device/{macButton}
 
 for more information visit the official [documentation](https://mystrom.ch/wp-content/uploads/REST_API_WBP.txt)
 
