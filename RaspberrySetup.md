@@ -81,8 +81,11 @@ Motion is a nice lightweight, yet capable application for operating surveillance
   - GND to #6
   - Rx (view from Computer) to #8
   - Tx (view from Computer) to #10
+  - See picture below
 - On windows connect to the serial console using e.g. PuTTY
 - On windows look up the COM Port in the Device Manager
 - Set the baud rate to 115200
 - Connect
 - Further information: http://elinux.org/RPi_Serial_Connection
+
+![Serial Connection](serial_connection_setup.jpg)
