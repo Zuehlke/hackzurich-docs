@@ -1,10 +1,14 @@
 #   Raspi Setup HackZH
 
 ##  Environment
+The Raspberry Pi you received is preconfigured with 'Raspian Stretch with Desktop' version 'August 2017'.
+You can use the device in desktop mode (connect mouse, keyboard and a screen) or 
+you can connect via SSH to the device.
+
+
 
 ### Login
-Default user:     pi
-Default password: raspberry
+Default user is `pi`, default password is `raspberry`
 
 ##  Tinkerforge (preinstalled)
 https://www.tinkerforge.com
@@ -36,6 +40,7 @@ using the wide range of nodes in the palette that can be deployed to its runtime
 
 ### Usage
 - Run `Menu/Programming/Node-RED` (starts the application in terminal)
+- Or execute `node-red-start` via SSH
 - In the webbrowser: `localhost:1880` or `http://{device-ip}:1880
 
 ### Configuration
