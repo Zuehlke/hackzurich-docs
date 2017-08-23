@@ -26,7 +26,7 @@ Mobile APIs
 
 # SiriKit (iOS)
 
-# ![image alt text](image_0.png)
+# ![image alt text](img/SiriKit.png)
 
 * Adding third party extensions to Siri is very different from adding third party extensions to Alexa or Google Home. On Alexa and Google Home, the extensions are web based and run in the cloud. For Siri extensions, Apple uses native Apps that run on the device, are compiled, and usually written in Swift. [SiriKit](https://developer.apple.com/sirikit/) is the framework that developers use to allow their Apps to use Siri.
 
