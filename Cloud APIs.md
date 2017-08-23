@@ -47,8 +47,42 @@
 * [Alexa](https://ifttt.com/amazon_alexa)
 
     * The shortfall of Alexa's IFTTT integration is the lack of any actions whatsoever. Alexa can only be used as a trigger in IFTTT. That means I can't, for example, complete a task in Todoist and have Alexa play a song. Or as editor Ry Crist suggested, you can't have Alexa play sound bites, such as a dog barking, when motion is detected or a door opens in the middle of the night.
+	
+	* Triggers
+		
+		* Say a specific phrase
+		
+		* Item modified on your To Do List
+		
+		* Item modified on your Shopping List
+		
+		* Your Alarm goes off
+		
+		* Your Timer goes off
+		
+		* ...
+		
+		
 
 * [myStrom](https://ifttt.com/mystrom)
+
+	* Triggers
+	
+		* Button pressed
+		
+		* Switch on/off
+		
+	* Actions
+	
+		* myStrom device on
+		
+		* myStrom device off
+		
+		* Toggle myStrom device
+		
+		* Change color
+		
+		* Set scene
 
 # Google Calendar API
 
