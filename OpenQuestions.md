@@ -7,11 +7,8 @@
     - MyStrom Switch
     - MyStrom Button
     - iPad cannot interact with Raspberry Pi
-- Are reverse ARP requests possible in the WLAN?
-  - Zuehlke IoT SmartHome needs to know the IPs of their devices
-  - Therefore we would need to seek for the MAC addresses of this devices
-  - If this is not possible, Zuehlke has to realize another solution to find out the IPs of the devices
-  - Independent from this, Intra-BSS-Traffic is a must be available!
+- Is it possible to get the IP address of a device when the MAC address is known?
+  - We know the MAC address of our devices and need the IP
 - How many devices are allowed for each developer group?
   - Zuhelke SmartHome groups need up to 5-10 devices
   - Devices: Raspberry, MyStrom Switch, MyStrom Button, iPad
