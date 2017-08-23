@@ -9,6 +9,10 @@
     - iPad cannot interact with Raspberry Pi
 - It would be helpful if we already know the WLAN SSID and password on the hack ZH
   - If we have the information before the start of the hack, we can prepare the Raspberry Pi images
+- What is the lease time of the DHCP?
+  - They shall be stable for the whole hack!
+- Is it possible to give a list of MAC-Addresses for static IPs?
+  - If DHCP can be configured to provide static IPs for the IoT devices, we would have no issues
 - Is it possible to get the IP address of a device when the MAC address is known?
   - We know the MAC address of our devices and need the IP
 - How many devices (IPs) are allowed for each developer group?
