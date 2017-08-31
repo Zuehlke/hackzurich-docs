@@ -96,3 +96,10 @@
 
 * [Official documentation](https://msdn.microsoft.com/de-de/office/office365/api/calendar-rest-operations)
 
+# Ethereum Setup
+
+* In order to setup a private blockchain with Ethereum a quick option could be to use a prepared docker image. A Zühlke employee prepared such an image for his own educational projects.
+ 
+ * [Ethereum Blockchain with Docker](https://github.com/kabl/docker-ethereum/tree/master/node1)
+ 
+
