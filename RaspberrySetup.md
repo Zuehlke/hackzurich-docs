@@ -5,7 +5,19 @@ The Raspberry Pi you received is preconfigured with 'Raspian Stretch with Deskto
 You can use the device in desktop mode (connect mouse, keyboard and a screen) or 
 you can connect via SSH to the device.
 
+### WiFi Network
+The Image comes preconfigured with SSID and Password. Once the Rasperry Pi is connected to the WiFi Network it's LED will blink the IP Address.
 
+For example the IP Adress 192.168.1.37 will be signalled as:
+- *1* x slow followed by a short pause, 
+- *9* x slow followed by a short pause,
+- *2* x slow followed by a short pause, 
+- 3 x fast for the *dot*,
+- *1* x slow followed by a short pause,
+- *6* x slow followed by a short pause,
+- ...
+
+To change the SSID and Password it is necessary to mount the SD card and change the settings in /etc/wpa_supplicant/wpa_supplicant.conf
 
 ### Login
 Default user is `pi`, default password is `raspberry`
