@@ -1,17 +1,17 @@
-#   Raspi Setup HackZH
+# Raspi Setup HackZH
 
-##  Environment
+## Environment
 The Raspberry Pi you received is preconfigured with 'Raspian Stretch with Desktop' version 'August 2017'.
-You can use the device in desktop mode (connect mouse, keyboard and a screen) or 
+You can use the device in desktop mode (connect mouse, keyboard and a screen) or
 you can connect via SSH to the device.
 
 ### WiFi Network
 The Raspberry Pi comes preconfigured with SSID and Password. Once the Rasperry Pi is connected to the WiFi Network it's LED will blink the IP Address.
 
 For example the IP Adress 192.168.1.37 will be signalled as:
-- *1* x slow followed by a short pause, 
+- *1* x slow followed by a short pause,
 - *9* x slow followed by a short pause,
-- *2* x slow followed by a short pause, 
+- *2* x slow followed by a short pause,
 - 3 x fast for the *dot*,
 - *1* x slow followed by a short pause,
 - *6* x slow followed by a short pause,
