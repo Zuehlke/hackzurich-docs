@@ -101,5 +101,17 @@
 * In order to setup a private blockchain with Ethereum a quick option could be to use a prepared docker image. A Zühlke employee prepared such an image for his own educational projects.
  
  * [Ethereum Blockchain with Docker](https://github.com/kabl/docker-ethereum/tree/master/node1)
+ * [Similar to the above] (https://capgemini.github.io/blockchain/ethereum-docker-compose/)
+ * [Extended tutorial organized in a series of articles] (https://medium.com/@andrenit/buildind-an-ethereum-playground-with-docker-part-1-introduction-80be173aaa7a)
+ 
+ # Spring Boot Setup
+ 
+ * There are many ways to build a REST service. In case you are into Java then Spring Boot might be a quick option to use. The following links can give you a head start.
+ 
+ * [Official Spring Boot documentation] (https://spring.io/guides/gs/rest-service/)
+ * [Setup a project quickly] (http://start.spring.io/)
+ 
+ 
+ 
  
 
