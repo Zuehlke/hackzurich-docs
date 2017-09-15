@@ -6,7 +6,7 @@
 * 1x Dual Button  Bricklet
 * 1x RGB LED Bricklet
 
-## Further Components available on demand
+## Further components available on demand
 * Humidity Bricklet
 * Ambient Light Bricklet 2.0
 * Motion Detection Bricklet
