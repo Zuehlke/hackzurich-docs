@@ -19,3 +19,4 @@ After you set the Button up you are able to configure the endpoints for the sing
 For more information visit the official [documentation](https://mystrom.ch/wp-content/uploads/REST_API_WBP.txt)
 
 ## myStrom WiFi Switch
+Plug the myStrom WIFI Switch to the power plug and connect your computer to the WIFI "my-<number>". Follow the instructions of 192.168.254.1 and connect it to the desired WIFI.
