@@ -7,7 +7,7 @@ This repository contains some useful resources for the workshop #11 "Build your 
 
 ## Available IoT devices or use cases
 
-- [All components](./all_components.md)
+- [All components](./available_components.md)
 - [Tinkerforge](./tinkerforge.md)
 - [Image object recognition](./image_recognition_rpi.md)
 - [MyStrom](./my_strom_setup.md)
