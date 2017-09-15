@@ -14,8 +14,8 @@ in your browser e.g: http://{ipButton}/api/v1/device/{macButton} like http://172
 * in windows: curl.exe -v -d "single=get://{endpoint}&double=get://{endpoint}" http://{ipButton}/api/v1/device/{macButton}
 
 ----
-To setup the myStrom WiFi Button you need to use the myStrom App and follow their setup process. 
-After you set the Button up you are able to configure the endpoints for the single, long and double click events. An example is following:
-for more information visit the official [documentation](https://mystrom.ch/wp-content/uploads/REST_API_WBP.txt)
+We already did the setup. If you want to do it again, you need to use the myStrom App and follow the setup process. 
+After you set the Button up you are able to configure the endpoints for the single, long and double click events.
+For more information visit the official [documentation](https://mystrom.ch/wp-content/uploads/REST_API_WBP.txt)
 
 ## myStrom WiFi Switch
