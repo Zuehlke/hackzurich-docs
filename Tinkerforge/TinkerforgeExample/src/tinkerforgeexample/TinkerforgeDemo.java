@@ -25,14 +25,14 @@ public class TinkerforgeDemo {
 
 	private static final String DUAL_BUTTON_UID = "vTZ";
 	private static final String RGB_LED_UID = "AQG";
-	private static final String MOTION_DETECTOR_UID = "BYr";
+	
 	private static final String SERVO_UID = "6Rrbr9";
 	private static final short SERVO_NUMBER = 6;
 
 	private static int colorNumber = 0;
 	private static BrickletRGBLED rgbLedBricklet;
 	private static BrickletDualButton dualButtonBricklet;
-	private static BrickletMotionDetector motionDetectorBricklet;
+	private static MotionDetector motionDetector;
 	private static BrickServo servoBricklet;
 	private static NFCRFIDBricklet nfcrfidBricklet;
 
@@ -41,15 +41,17 @@ public class TinkerforgeDemo {
 	 *            the command line arguments
 	 */
 	public static void main(String[] args) throws Exception {
-
+		TinkerforgeDemo tinkerforgeDemo = new TinkerforgeDemo();
 		IPConnection ipcon = new IPConnection(); // Create IP connection
 		dualButtonBricklet = new BrickletDualButton(DUAL_BUTTON_UID, ipcon);
 		rgbLedBricklet = new BrickletRGBLED(RGB_LED_UID, ipcon);
-		motionDetectorBricklet = new BrickletMotionDetector(MOTION_DETECTOR_UID, ipcon);
+		motionDetector = new MotionDetector(tinkerforgeDemo, ipcon);
 		servoBricklet = new BrickServo(SERVO_UID, ipcon);
 		nfcrfidBricklet = new NFCRFIDBricklet(ipcon, rgbLedBricklet);
 
 		ipcon.connect(HOST, PORT); // Connect to brickd
+
+		nfcrfidBricklet.registerLogic();
 
 		nfcrfidBricklet.registerLogic();
 
@@ -71,24 +73,6 @@ public class TinkerforgeDemo {
 					} catch (Exception e) {
 					}
 				}
-			}
-		});
-
-		motionDetectorBricklet.addMotionDetectedListener(new BrickletMotionDetector.MotionDetectedListener() {
-			public void motionDetected() {
-				System.out.println("motion detected ...");
-				try {
-					onMotionDetected();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				System.out.println("motion detected ... done.");
-			}
-		});
-
-		motionDetectorBricklet.addDetectionCycleEndedListener(new BrickletMotionDetector.DetectionCycleEndedListener() {
-			public void detectionCycleEnded() {
-				System.out.println("Detection Cycle Ended (next detection possible in ~3 seconds)");
 			}
 		});
 
@@ -155,6 +139,16 @@ public class TinkerforgeDemo {
 			dualButtonBricklet.setLEDState(BrickletDualButton.LED_STATE_OFF, BrickletDualButton.LED_STATE_OFF);
 		} else {
 			dualButtonBricklet.setLEDState(BrickletDualButton.LED_STATE_OFF, BrickletDualButton.LED_STATE_ON);
+		}
+	}
+
+	public void setLightColor(java.awt.Color color) {
+		try {
+//			if (color == Color.YELLOW) {
+				rgbLedBricklet.setRGBValue((short) 255, (short) 255, (short)0);
+//			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }
