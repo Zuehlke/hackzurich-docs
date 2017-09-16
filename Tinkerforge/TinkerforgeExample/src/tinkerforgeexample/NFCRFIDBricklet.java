@@ -5,14 +5,14 @@ import com.tinkerforge.*;
 public class NFCRFIDBricklet {
 
     private final BrickletNFCRFID instance;
+    private BrickletRGBLED rgbLedBricklet;
     private static final String UID = "utP";
     private short currentTagType = 0;
-	private TinkerforgeDemo tinkerforgeDemo;
 
 
-    public NFCRFIDBricklet(TinkerforgeDemo tinkerforgeDemo, IPConnection ipcon) {
-        this.tinkerforgeDemo = tinkerforgeDemo;
-		this.instance = new BrickletNFCRFID(UID, ipcon);
+    public NFCRFIDBricklet(IPConnection config, BrickletRGBLED rgbLedBricklet) {
+        this.instance = new BrickletNFCRFID(UID, config);
+        this.rgbLedBricklet = rgbLedBricklet;
     }
 
     public void registerLogic() throws TimeoutException, NotConnectedException {
@@ -24,16 +24,16 @@ public class NFCRFIDBricklet {
                 }
 
                 if (state == BrickletNFCRFID.STATE_REQUEST_TAG_ID_READY) {
-                    BrickletRGBLED.RGBValue rgbValue = tinkerforgeDemo.getLight().getRGBValue();
+                    BrickletRGBLED.RGBValue rgbValue = rgbLedBricklet.getRGBValue();
                     StringBuilder s = readTagId();
                     if ("47cc1f2794d80".equals(s.toString())) {
-                    	tinkerforgeDemo.getLight().setRGBValue((short) 0, (short) 255, (short) 0);
+                        rgbLedBricklet.setRGBValue((short) 0, (short) 255, (short) 0);
                     } else {
-                    	tinkerforgeDemo.getLight().setRGBValue((short) 255, (short) 0, (short) 0);
+                        rgbLedBricklet.setRGBValue((short) 255, (short) 0, (short) 0);
                     }
 
                     Thread.sleep(2000);
-                    tinkerforgeDemo.getLight().setRGBValue(rgbValue.r, rgbValue.b, rgbValue.g);
+                    rgbLedBricklet.setRGBValue(rgbValue.r, rgbValue.b, rgbValue.g);
 
                     System.out.println(s);
                 }
