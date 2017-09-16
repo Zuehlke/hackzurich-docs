@@ -14,7 +14,7 @@ public class MotionDetector implements BrickletMotionDetector.MotionDetectedList
 	private TinkerforgeDemo tinkerforgeDemo;
 	
 	private void onMotionDetected() {
-		tinkerforgeDemo.setLightColor(Color.YELLOW);
+		tinkerforgeDemo.getLight().setColor(Color.YELLOW);
 	}
 
 	public MotionDetector(TinkerforgeDemo tinkerforgeDemo, IPConnection ipcon) {

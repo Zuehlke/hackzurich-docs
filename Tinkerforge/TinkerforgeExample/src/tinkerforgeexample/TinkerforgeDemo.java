@@ -24,32 +24,26 @@ public class TinkerforgeDemo {
 	private static final int PORT = 4223;
 
 	private static final String DUAL_BUTTON_UID = "vTZ";
-	private static final String RGB_LED_UID = "AQG";
-	
 	private static final String SERVO_UID = "6Rrbr9";
 	private static final short SERVO_NUMBER = 6;
 
-	private static int colorNumber = 0;
-	private static BrickletRGBLED rgbLedBricklet;
 	private static BrickletDualButton dualButtonBricklet;
-	private static MotionDetector motionDetector;
+	private MotionDetector motionDetector;
+	private Light light;
 	private static BrickServo servoBricklet;
 	private static NFCRFIDBricklet nfcrfidBricklet;
-
-	/**
-	 * @param args
-	 *            the command line arguments
-	 */
-	public static void main(String[] args) throws Exception {
-		TinkerforgeDemo tinkerforgeDemo = new TinkerforgeDemo();
-		IPConnection ipcon = new IPConnection(); // Create IP connection
+	
+	public TinkerforgeDemo() throws Exception{
+		IPConnection ipcon = new IPConnection();
+		motionDetector = new MotionDetector(this, ipcon);
+		light = new Light(this, ipcon);
 		dualButtonBricklet = new BrickletDualButton(DUAL_BUTTON_UID, ipcon);
-		rgbLedBricklet = new BrickletRGBLED(RGB_LED_UID, ipcon);
-		motionDetector = new MotionDetector(tinkerforgeDemo, ipcon);
 		servoBricklet = new BrickServo(SERVO_UID, ipcon);
-		nfcrfidBricklet = new NFCRFIDBricklet(ipcon, rgbLedBricklet);
+		nfcrfidBricklet = new NFCRFIDBricklet(this, ipcon);
 
 		ipcon.connect(HOST, PORT); // Connect to brickd
+		
+		motionDetector.startMotionDetection();
 
 		nfcrfidBricklet.registerLogic();
 
@@ -61,13 +55,10 @@ public class TinkerforgeDemo {
 				// This function is called when a button on the dual button
 				// bricklet is pressed.
 				System.out.println("dual button clicked.");
-				if (buttonL == BrickletDualButton.BUTTON_STATE_PRESSED) {
-					try {
-						toggleRgbLedColor();
-					} catch (Exception e) {
-					}
+				if (buttonL > 0) {
+					motionDetector.motionDetected();
 				}
-				if (buttonR == BrickletDualButton.BUTTON_STATE_PRESSED) {
+				if (buttonR > 0) {
 					try {
 						toggleRightDualButtonLed();
 					} catch (Exception e) {
@@ -81,19 +72,13 @@ public class TinkerforgeDemo {
 		ipcon.disconnect();
 	}
 
-	protected static void onMotionDetected() throws TimeoutException, NotConnectedException, InterruptedException {
-		moveServo();
-		flashLight();
+	public static void main(String[] args) throws Exception {
+		new TinkerforgeDemo();
 	}
 
-	private static void flashLight() throws TimeoutException, NotConnectedException, InterruptedException {
-		short off = (short) 0;
-		for (int i = 0; i <= 5; i++) {
-			RGBValue rgbValue = rgbLedBricklet.getRGBValue();
-			rgbLedBricklet.setRGBValue(off, off, off);
-			Thread.sleep(500);
-			rgbLedBricklet.setRGBValue(rgbValue.r, rgbValue.g, rgbValue.b);
-		}
+	protected void onMotionDetected() throws TimeoutException, NotConnectedException, InterruptedException {
+		moveServo();
+		getLight().flash();
 	}
 
 	private static void moveServo() throws TimeoutException, NotConnectedException {
@@ -103,29 +88,6 @@ public class TinkerforgeDemo {
 			servoBricklet.setPosition(SERVO_NUMBER, (short) 8000);
 		} else {
 			servoBricklet.setPosition(SERVO_NUMBER, (short) -8000);
-		}
-	}
-
-	/**
-	 * Toggle the color of the RGB LED bricklet.
-	 */
-	private static void toggleRgbLedColor() throws Exception {
-		if (colorNumber == 0) {
-			rgbLedBricklet.setRGBValue((short) 255, (short) 255, (short) 255); // White
-			colorNumber++;
-		} else if (colorNumber == 1) {
-			rgbLedBricklet.setRGBValue((short) 255, (short) 0, (short) 0); // Red
-			colorNumber++;
-		} else if (colorNumber == 2) {
-			rgbLedBricklet.setRGBValue((short) 0, (short) 255, (short) 0); // Green
-			colorNumber++;
-		} else if (colorNumber == 3) {
-			rgbLedBricklet.setRGBValue((short) 0, (short) 0, (short) 255); // Blue
-			colorNumber++;
-		} else {
-			rgbLedBricklet.setRGBValue((short) 0, (short) 0, (short) 0); // Black
-																			// (Off)
-			colorNumber = 0;
 		}
 	}
 
@@ -142,13 +104,8 @@ public class TinkerforgeDemo {
 		}
 	}
 
-	public void setLightColor(java.awt.Color color) {
-		try {
-//			if (color == Color.YELLOW) {
-				rgbLedBricklet.setRGBValue((short) 255, (short) 255, (short)0);
-//			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public Light getLight() {
+		return light;
 	}
+
 }
