@@ -23,10 +23,10 @@ If necessary the SSID and Password can be changed by mounting the SD card on a L
 
 If you want to configure a static IP address for your WLAN Network you have to add and adapt the following lines to /etc/dhcpd.conf and reboot your Raspberry Pi. After Reboot check the IP Adress with the blinking LED.
 
-interface wlan0
-static ip_address=172.31.0.5/20
-static routers=172.31.0.1
-static domain_name_servers=172.31.0.1 8.8.8.8
+    interface wlan0
+    static ip_address=172.31.0.5/20
+    static routers=172.31.0.1
+    static domain_name_servers=172.31.0.1 8.8.8.8
 
 ### Login
 Default user is `pi`, default password is `raspberry`
