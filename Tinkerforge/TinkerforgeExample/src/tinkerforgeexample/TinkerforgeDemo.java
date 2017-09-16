@@ -26,15 +26,14 @@ import com.tinkerforge.BrickletRGBLED.RGBValue;
  */
 public class TinkerforgeDemo {
 
-	private static final String HOST = "localhost";
+	private static final String HOST = "172.31.0.225";
 	private static final int PORT = 4223;
 
 	private static final String DUAL_BUTTON_UID = "vTZ";
 	private static final String RGB_LED_UID = "AQG";
 	private static final String MOTION_DETECTOR_UID = "BYr";
-	private static final String SERVO_UID = "BYr";
+	private static final String SERVO_UID = "6Rrbr9";
 	private static final short SERVO_NUMBER = 6;
-	
 
 	private static int colorNumber = 0;
 	private static BrickletRGBLED rgbLedBricklet;
@@ -61,6 +60,7 @@ public class TinkerforgeDemo {
 			public void stateChanged(short buttonL, short buttonR, short ledL, short ledR) {
 				// This function is called when a button on the dual button
 				// bricklet is pressed.
+				System.out.println("dual button clicked.");
 				if (buttonL == BrickletDualButton.BUTTON_STATE_PRESSED) {
 					try {
 						toggleRgbLedColor();
@@ -78,14 +78,13 @@ public class TinkerforgeDemo {
 
 		motionDetectorBricklet.addMotionDetectedListener(new BrickletMotionDetector.MotionDetectedListener() {
 			public void motionDetected() {
+				System.out.println("motion detected ...");
 				try {
-					System.out.println("motion detected ...");
-					flash();
-					System.out.println("motion detected ... done.");
-
+					onMotionDetected();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				System.out.println("motion detected ... done.");
 			}
 		});
 
@@ -100,19 +99,28 @@ public class TinkerforgeDemo {
 		ipcon.disconnect();
 	}
 
-	protected static void flash() throws TimeoutException, NotConnectedException, InterruptedException {
+	protected static void onMotionDetected() throws TimeoutException, NotConnectedException, InterruptedException {
+		moveServo();
+		flashLight();
+	}
+
+	private static void flashLight() throws TimeoutException, NotConnectedException, InterruptedException {
+		short off = (short) 0;
+		for (int i = 0; i <= 5; i++) {
+			RGBValue rgbValue = rgbLedBricklet.getRGBValue();
+			rgbLedBricklet.setRGBValue(off, off, off);
+			Thread.sleep(500);
+			rgbLedBricklet.setRGBValue(rgbValue.r, rgbValue.g, rgbValue.b);
+		}
+	}
+
+	private static void moveServo() throws TimeoutException, NotConnectedException {
 		short position = servoBricklet.getPosition(SERVO_NUMBER);
 		System.out.println("servo was " + position);
 		if (position < 0) {
-			servoBricklet.setPosition(SERVO_NUMBER, (short)8000);
+			servoBricklet.setPosition(SERVO_NUMBER, (short) 8000);
 		} else {
-			servoBricklet.setPosition(SERVO_NUMBER, (short)-8000);
-		}
-		for (int i = 0 ; i <= 10; i++) {
-			RGBValue rgbValue = rgbLedBricklet.getRGBValue();
-			rgbLedBricklet.setRGBValue((short)0, (short)0, (short)0);
-			Thread.sleep(100);
-			rgbLedBricklet.setRGBValue(rgbValue.r, rgbValue.g, rgbValue.b);
+			servoBricklet.setPosition(SERVO_NUMBER, (short) -8000);
 		}
 	}
 
