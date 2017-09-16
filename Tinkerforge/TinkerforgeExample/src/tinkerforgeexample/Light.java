@@ -1,5 +1,7 @@
 package tinkerforgeexample;
 
+import java.awt.Color;
+
 import com.tinkerforge.BrickletRGBLED;
 import com.tinkerforge.IPConnection;
 import com.tinkerforge.NotConnectedException;
@@ -19,21 +21,45 @@ public class Light {
 		rgbLedBricklet = new BrickletRGBLED(RGB_LED_UID, ipcon);
 	}
 	
+	public void setColor(java.awt.Color color, int ms) {
+		try {
+			RGBValue rgbValue = rgbLedBricklet.getRGBValue();
+			setColor(color);
+			new Thread(new LightRunnable(ms, rgbValue)).start();
+		} catch (TimeoutException | NotConnectedException e) {
+			System.err.println(e.getMessage());
+		}
+	}
+	
 	public void setColor(java.awt.Color color) {
 		try {
-//			if (color == Color.YELLOW) {
-				rgbLedBricklet.setRGBValue((short) 255, (short) 255, (short)0);
-//			}
+			if (color == Color.BLACK) {
+				setRGBValue(0,  0,  0);
+			}
+			if (color == Color.YELLOW) {
+				setRGBValue( 255,  255, 0);
+			}
+			if (color == Color.WHITE) {
+				setRGBValue( 255,  255,  255); // White
+			}
+			if (color == Color.RED) {
+				setRGBValue( 255,  0,  0); // Red
+			}
+			if (color == Color.GREEN) {
+				setRGBValue( 0,  255,  0); // Green
+			}
+			if (color == Color.BLUE) {
+				setRGBValue( 0,  0,  255); // Blue
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public void flash() throws TimeoutException, NotConnectedException, InterruptedException {
-		short off = 0;
-		for (int i = 0; i <= 5; i++) {
-			RGBValue rgbValue = rgbLedBricklet.getRGBValue();
-			rgbLedBricklet.setRGBValue(off, off, off);
+	public void flash(int times) throws TimeoutException, NotConnectedException, InterruptedException {
+		RGBValue rgbValue = rgbLedBricklet.getRGBValue();
+		for (int i = 1; i <= times; i++) {
+			setColor(Color.BLACK);
 			Thread.sleep(500);
 			rgbLedBricklet.setRGBValue(rgbValue.r, rgbValue.g, rgbValue.b);
 		}
@@ -41,19 +67,19 @@ public class Light {
 	
 	public void toggleRgbLedColor() throws Exception {
 		if (colorNumber == 0) {
-			rgbLedBricklet.setRGBValue((short) 255, (short) 255, (short) 255); // White
+			setColor(Color.WHITE);
 			colorNumber++;
 		} else if (colorNumber == 1) {
-			rgbLedBricklet.setRGBValue((short) 255, (short) 0, (short) 0); // Red
+			setColor(Color.RED);
 			colorNumber++;
 		} else if (colorNumber == 2) {
-			rgbLedBricklet.setRGBValue((short) 0, (short) 255, (short) 0); // Green
+			setColor(Color.GREEN);
 			colorNumber++;
 		} else if (colorNumber == 3) {
-			rgbLedBricklet.setRGBValue((short) 0, (short) 0, (short) 255); // Blue
+			setColor(Color.BLUE);
 			colorNumber++;
 		} else {
-			rgbLedBricklet.setRGBValue((short) 0, (short) 0, (short) 0); // Black
+			setColor(Color.BLACK);
 			colorNumber = 0;
 		}
 	}
@@ -65,4 +91,24 @@ public class Light {
 	public void setRGBValue(int r, int g, int b) throws TimeoutException, NotConnectedException {
 		rgbLedBricklet.setRGBValue((short)r, (short)g, (short)b);
 	}
+	
+	private  class LightRunnable implements Runnable {
+		
+		private int ms;
+		private RGBValue rgbValue;
+
+		public LightRunnable(int ms, RGBValue rgbValue) {
+			this.ms = ms;
+			this.rgbValue = rgbValue;
+		}
+
+	    public void run() {
+	        try {
+				Thread.sleep(ms);
+				setRGBValue(rgbValue.r, rgbValue.g, rgbValue.b);
+			} catch (Exception  e) {
+				Thread.interrupted();
+			}
+	    }
+		}
 }

@@ -5,7 +5,6 @@
 package tinkerforgeexample;
 
 import com.tinkerforge.*;
-import com.tinkerforge.BrickletRGBLED.RGBValue;
 
 /**
  * A simple example showing how to create a simple Tinkerforge application using
@@ -78,7 +77,7 @@ public class TinkerforgeDemo {
 
 	protected void onMotionDetected() throws TimeoutException, NotConnectedException, InterruptedException {
 		moveServo();
-		getLight().flash();
+		getLight().flash(5);
 	}
 
 	private static void moveServo() throws TimeoutException, NotConnectedException {

@@ -1,5 +1,7 @@
 package tinkerforgeexample;
 
+import java.awt.Color;
+
 import com.tinkerforge.*;
 
 public class NFCRFIDBricklet {
@@ -27,9 +29,9 @@ public class NFCRFIDBricklet {
                     BrickletRGBLED.RGBValue rgbValue = tinkerforgeDemo.getLight().getRGBValue();
                     StringBuilder s = readTagId();
                     if ("47cc1f2794d80".equals(s.toString())) {
-                    	tinkerforgeDemo.getLight().setRGBValue((short) 0, (short) 255, (short) 0);
+                    	tinkerforgeDemo.getLight().setColor(Color.GREEN);;
                     } else {
-                    	tinkerforgeDemo.getLight().setRGBValue((short) 255, (short) 0, (short) 0);
+                    	tinkerforgeDemo.getLight().setColor(Color.RED);
                     }
 
                     Thread.sleep(2000);
