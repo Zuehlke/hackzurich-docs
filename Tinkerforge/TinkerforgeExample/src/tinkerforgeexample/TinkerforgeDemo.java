@@ -4,13 +4,7 @@
  */
 package tinkerforgeexample;
 
-import com.tinkerforge.IPConnection;
-import com.tinkerforge.NotConnectedException;
-import com.tinkerforge.TimeoutException;
-import com.tinkerforge.BrickServo;
-import com.tinkerforge.BrickletDualButton;
-import com.tinkerforge.BrickletMotionDetector;
-import com.tinkerforge.BrickletRGBLED;
+import com.tinkerforge.*;
 import com.tinkerforge.BrickletRGBLED.RGBValue;
 
 /**
@@ -40,6 +34,7 @@ public class TinkerforgeDemo {
 	private static BrickletDualButton dualButtonBricklet;
 	private static BrickletMotionDetector motionDetectorBricklet;
 	private static BrickServo servoBricklet;
+	private static NFCRFIDBricklet nfcrfidBricklet;
 
 	/**
 	 * @param args
@@ -52,8 +47,11 @@ public class TinkerforgeDemo {
 		rgbLedBricklet = new BrickletRGBLED(RGB_LED_UID, ipcon);
 		motionDetectorBricklet = new BrickletMotionDetector(MOTION_DETECTOR_UID, ipcon);
 		servoBricklet = new BrickServo(SERVO_UID, ipcon);
+		nfcrfidBricklet = new NFCRFIDBricklet(ipcon, rgbLedBricklet);
 
 		ipcon.connect(HOST, PORT); // Connect to brickd
+
+		nfcrfidBricklet.registerLogic();
 
 		// Add state changed listener
 		dualButtonBricklet.addStateChangedListener(new BrickletDualButton.StateChangedListener() {
