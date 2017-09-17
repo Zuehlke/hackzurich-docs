@@ -11,6 +11,7 @@ public class NFCRFIDBricklet {
     private short currentTagType = 0;
     private TinkerforgeDemo app;
     private String lastProcessedTagId;
+    private boolean doNotDisturb = false;
 
 
     public NFCRFIDBricklet(TinkerforgeDemo app, IPConnection ipcon) {
@@ -30,7 +31,7 @@ public class NFCRFIDBricklet {
                 if (state == BrickletNFCRFID.STATE_REQUEST_TAG_ID_READY) {
                     String currentTagId = readTagId();
                     System.out.println("ctagid" + currentTagId);
-                    if ("47cc1f2794d80".equals(currentTagId)) {
+                    if (!doNotDisturb && "47cc1f2794d80".equals(currentTagId)) {
                         app.moveServo(true, 1000);
                         app.blackOutLight();
                         app.getLight().setColor(Color.GREEN, 1000);
@@ -69,5 +70,9 @@ public class NFCRFIDBricklet {
                 System.err.println(e);
             }
         }).start();
+    }
+
+    public void setDoNotDisturb(boolean doNotDisturb) {
+        this.doNotDisturb = doNotDisturb;
     }
 }

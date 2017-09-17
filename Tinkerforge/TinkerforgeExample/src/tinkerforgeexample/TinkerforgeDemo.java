@@ -4,9 +4,15 @@
  */
 package tinkerforgeexample;
 
+import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpHandler;
+import com.sun.net.httpserver.HttpServer;
 import com.tinkerforge.*;
 
 import java.awt.*;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.InetSocketAddress;
 
 /**
  * A simple example showing how to create a simple Tinkerforge application using
@@ -18,7 +24,7 @@ import java.awt.*;
  * (see the "TODO's" below). Use Tinkerforge's Brick Daemon and Brick Viewer to
  * obtain the UID's.
  */
-public class TinkerforgeDemo {
+public class TinkerforgeDemo implements HttpHandler {
 
     private static final String HOST = "172.31.0.225";
     private static final int PORT = 4223;
@@ -65,23 +71,18 @@ public class TinkerforgeDemo {
                 }
 
                 System.out.println("dual button clicked." + buttonL + buttonR + ledL + ledR);
-                /*try {
-                    moveServo(buttonL > 0);
-                } catch (TimeoutException | NotConnectedException e) {
-                    e.printStackTrace();
-                }
-
-                if (buttonR > 0) {
-                    try {
-                        toggleRightDualButtonLed();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }*/
             }
         });
 
+
+        HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
+        server.createContext("/", this);
+        server.start();
+
+
         System.out.println("Press key to exit");
+
+
         System.in.read();
         ipcon.disconnect();
     }
@@ -138,5 +139,31 @@ public class TinkerforgeDemo {
                 e.printStackTrace();
             }
         }).start();
+    }
+
+    @Override
+    public void handle(HttpExchange httpExchange) throws IOException {
+        try {
+            String x = httpExchange.getRequestURI().toString();
+            switch (x) {
+                case "/":
+                    moveServo(true, 1000);
+                    break;
+                case "/donotdisturb":
+                    nfcrfidBricklet.setDoNotDisturb(true);
+                    break;
+                case "/dodisturb":
+                    nfcrfidBricklet.setDoNotDisturb(false);
+                    break;
+
+            }
+            String response = "This is the response";
+            httpExchange.sendResponseHeaders(200, response.length());
+            OutputStream os = httpExchange.getResponseBody();
+            os.write(response.getBytes());
+            os.close();
+        } catch (TimeoutException | NotConnectedException e) {
+            e.printStackTrace();
+        }
     }
 }
